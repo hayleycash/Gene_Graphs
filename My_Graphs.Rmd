@@ -1,0 +1,8 @@
+---
+title: "My_Graphs"
+output: pdf_document
+date: "2024-07-25"
+---
+
+The beginning of my document for the Project #1 Assignment
+
