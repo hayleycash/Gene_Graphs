@@ -6,3 +6,4 @@ date: "2024-07-25"
 
 The beginning of my document for the Project #1 Assignment
 
+This is an additional line to ensure my git is working.
