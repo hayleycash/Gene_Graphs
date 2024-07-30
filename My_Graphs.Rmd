@@ -42,7 +42,6 @@ merged_df <- merged_df %>%
 ```
 
 
-
 ```{r}
 # Histogram of ABCB4 gene expression
 ggplot(merged_df, aes(x = expression)) +
@@ -57,9 +56,9 @@ ggplot(merged_df, aes(x = expression)) +
   theme(
     plot.background = element_rect(fill = "black"),
     panel.background = element_rect(fill = "black"),
-    text = element_text(family = "Arial", size = 12, color = "white"),
+    text = element_text(size = 12, color = "white"),
     plot.title = element_text(hjust = 0.5, size = 16, color = "white"),
-    axis.text = element_text(color = "white"), #changes the color of the numbers on gridlines
+    axis.text = element_text(color = "white") #changes the color of the numbers on gridlines
   )
 ```
 
@@ -82,7 +81,7 @@ ggplot(merged_df, aes(x = age, y = expression)) +
     plot.title = element_text(hjust = 0.5, face = "bold", size = 14),
     axis.title = element_text(face = "bold"),
     axis.text = element_text(color = "black"),
-    panel.border = element_rect(color = "black", fill = NA),
+    panel.border = element_rect(color = "black", fill = NA)
 #https://www.geeksforgeeks.org/add-panel-border-to-ggplot2-plot-in-r/
 #don't fill border or no graph appears
 #    panel.grid = element_line(color = "grey") : decided to remove as did not help but learned a new technique so if th etheme is changed, may be necessary later to know
