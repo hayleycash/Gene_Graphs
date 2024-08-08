@@ -81,7 +81,7 @@ gene_plots <- function(data_frame, name_genes, continuous_covariate,  categorica
 
 ```{r}
 # Define the genes to plot
-genes_want <- c("ABCB4", "AAR2", "ABHD1")
+genes_want <- c("ABCB4", "ABHD1", "ABHD1")
 
 # Call the function using original form of: "data_frame, name_genes, continuous_covariate, categorical_covariate_one, categorical_covariate_two"
 gene_plots(gene_express_df, genes_want, "age", "disease_status", "sex")
