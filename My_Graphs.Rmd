@@ -46,19 +46,24 @@ merged_df <- merged_df %>%
 # Histogram of ABCB4 gene expression
 ggplot(merged_df, aes(x = expression)) +
 #https://www.datacamp.com/tutorial/make-histogram-basic-r
-  geom_histogram(binwidth = 0.1, fill = "pink", color = "black") + #binwidth is how wide we want each box on histogram
+  geom_histogram(binwidth = 0.1, fill = "#69b3a2", color = "black") + #binwidth is how wide we want each box on histogram. Appropriate for data
+#changed colors to make it more like other plots I've seen in papers  
+
 #change labels
   labs(
     title = "Histogram of ABCB4 Gene Expression",
     x = "Gene Expression",
     y = "Count" #number which falls within THIS level of gene expression
   ) +
+  theme_minimal() +  # Using minimal as the base template
   theme(
-    plot.background = element_rect(fill = "black"),
-    panel.background = element_rect(fill = "black"),
-    text = element_text(size = 12, color = "white"),
-    plot.title = element_text(hjust = 0.5, size = 16, color = "white"),
-    axis.text = element_text(color = "white") #changes the color of the numbers on gridlines
+    plot.background = element_rect(fill = "white"),
+    panel.background = element_rect(fill = "white"),
+    panel.border = element_rect(color = "black", fill = NA),
+    text = element_text(size = 12),
+    plot.title = element_text(hjust = 0.5, face = "bold", size = 16),
+    axis.title = element_text(face = "bold", size = 12),
+    axis.text = element_text(color = "black", size = 10)
   )
 ```
 
@@ -66,21 +71,23 @@ ggplot(merged_df, aes(x = expression)) +
 ```{r}
 # Scatterplot of ABCB4 expression vs. age
 ggplot(merged_df, aes(x = age, y = expression)) +
-  geom_point(color = "#6633CC", size = 3) +  # Adjusting color and size to see points better and I did not like the base "purple" and "blue" http://www.sthda.com/english/wiki/colors-in-r
-  geom_smooth(method = "loess", color = "#EFC000FF", se = FALSE) +  # Add a regression line https://stackoverflow.com/questions/15633714/adding-a-regression-line-on-a-ggplot and https://ggplot2.tidyverse.org/reference/geom_smooth.html 
+  geom_point(color = "#1F77B4", size = 3, alpha = 0.7) +  #using a clear color and changing the thickness  http://www.sthda.com/english/wiki/colors-in-r
+  geom_smooth(method = "loess", color = "#69b3a2", se = FALSE, size = 1) + #keeping the color scheme similar for all the plots
+  # Add a regression line https://stackoverflow.com/questions/15633714/adding-a-regression-line-on-a-ggplot and https://ggplot2.tidyverse.org/reference/geom_smooth.html 
 # (decided to go with a loess instead of lm since a loess line shows the higher average gene expression around 40, and the lowest gene expression point at 70 years.
   labs(
     title = "Scatterplot of ABCB4 Gene Expression vs Age",
     x = "Age (yrs)", #continuous covariate
     y = "Gene Expression"
   ) +
+  theme_bw() +
   theme(
     plot.background = element_rect(fill = "white"),
-    panel.background = element_rect(fill = "lightgrey"),
+    panel.background = element_rect(fill = "white"),
     text = element_text(size = 12),
-    plot.title = element_text(hjust = 0.5, face = "bold", size = 14),
-    axis.title = element_text(face = "bold"),
-    axis.text = element_text(color = "black"),
+    plot.title = element_text(hjust = 0.5, face = "bold", size = 16), #keeping sizing consistent between plots
+    axis.title = element_text(face = "bold", size = 12),
+    axis.text = element_text(color = "black", size = 10),
     panel.border = element_rect(color = "black", fill = NA)
 #https://www.geeksforgeeks.org/add-panel-border-to-ggplot2-plot-in-r/
 #don't fill border or no graph appears
@@ -97,14 +104,17 @@ ggplot(merged_df,aes(x = disease_status, y = expression, fill = sex)) +
 #Add box plot
 geom_boxplot() + 
 #Define colors: Have to use three colors because sex is female, male, and unknown
-scale_fill_manual(values = c('darkgreen', 'grey', 'yellow')) + 
+scale_fill_manual(values = c('#1F77B4', '#69b3a2', 'yellow')) + 
+#using the same color scheme
     labs(
     title = "Boxplot of ABCB4 Expression by Disease Status and Sex"
   ) +
   theme(
     text = element_text(size = 12),
-    plot.title = element_text(hjust = 0.5, face = "bold", size = 14),
-    axis.title = element_text(face = "bold")
+    plot.title = element_text(hjust = 0.5, face = "bold", size = 16), #keeping sizing consistent between plots
+    axis.title = element_text(face = "bold", size = 12),
+    axis.text = element_text(color = "black", size = 10),
+    panel.border = element_rect(color = "black", fill = NA)
   )
 ```
 
