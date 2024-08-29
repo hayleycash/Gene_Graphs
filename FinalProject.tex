@@ -1,0 +1,94 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{float}
+\usepackage{amsmath}
+\usepackage{hyperref}
+\usepackage{natbib}
+\usepackage{cite}
+\usepackage{url} % For handling URLs in the bibliography
+
+
+\title{Analysis of ABCB4 Gene Expression}
+\date{\today}
+\author{}
+
+\begin{document}
+
+\maketitle
+
+\section{Introduction}
+In this study, we conduct a Large-Scale Multi-Omic Analysis to investigate the relationship between ABCB4 gene expression and COVID-19 severity \citep{GSE157103}, utilizing data from the GSE157103 dataset. The ABCB4 gene, crucial for phospholipid transport across cell membranes, has been implicated in various liver diseases due to its role in genetic defects \cite[{MedlinePlusABCB4}. Given its significant biological function, we aim to elucidate how ABCB4 expression patterns correlate with COVID-19 severity and associated covariates. This analysis seeks to provide deeper insights into the potential role of ABCB4 in modulating disease outcomes and contributing to our understanding of COVID-19 pathophysiology.
+
+\section{Methods}
+The analysis was carried out using R version 4.1.1 \citep{RCoreTeam}, with essential packages including \texttt{tidyverse} for data manipulation and visualization \citep{Wickham2019}, \texttt{pheatmap} for generating heatmaps, and \texttt{knitr} for dynamic report generation \citep{Xie2023}. Data preprocessing involved extracting relevant columns to focus on gene expression profiles, with particular emphasis on the ABCB4 gene for detailed analysis. \texttt{kable} was used to construct a summary table to assist in generalizing analysis \citep{Zhu2023}. Heatmaps were created using \texttt{pheatmap} to visually represent gene expression patterns \citep{Kolde2019}. To cluster the data, we employed hierarchical clustering using the Euclidean distance metric, which measures the straight-line distance between points in multidimensional space. This approach facilitated grouping based on similarity in gene expression patterns, enabling a clear understanding of the data structure \citep{GeeksforGeeksHeatmap}. The combination of these tools and methods provided a comprehensive framework for effective data analysis and visualization.
+
+\section{Results}
+
+\begin{table}[ht]
+\centering
+\caption{Summary Statistics Stratified by Sex showing the standard deviation or IQR for continuous variables and the n percent for categorical variables} %captions go above on tables and below on graphs
+\begin{tabular}{lccc}
+\hline
+Variable & Female & Male & Unknown \\
+\hline
+Age, mean (SD) & 59.88 (18.22) & 62.64 (14.65) & 83.00 (NA) \\
+Ferritin (ng/ml), median [IQR] & 318.0 [547.0] & 755.0 [849.0] & NA [NA] \\
+D-dimer (mg/l FEU), median [IQR] & 1.37 [5.86] & 2.21 [10.55] & NA [NA] \\
+Disease Status, n (\%) & 51 (74.5\%) & 74 (83.8\%) & 1 (100\%) \\
+Mechanical Ventilation, n (\%) & 51 (68.6\%) & 74 (52.7\%) & 1 (100\%) \\
+\hline
+\end{tabular}
+\end{table}
+
+
+\subsection{Histogram of ABCB4 Gene Expression}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{histogram.png}
+\caption{Histogram showing the distribution of ABCB4 gene expression.}
+\label{fig:histogram}
+\end{figure}
+
+\subsection{Scatter Plot of ABCB4 Gene Expression and Age}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{scatterplot.png}
+\caption{Scatter plot showing the relationship between ABCB4 gene expression and age.}
+\label{fig:scatter}
+\end{figure}
+
+\subsection{Boxplot of ABCB4 Gene Expression Stratified by Disease Status and Sex}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{boxplot.png}
+\caption{Boxplot showing ABCB4 gene expression stratified by disease status and sex.}
+\label{fig:boxplot}
+\end{figure}
+
+\subsection{Heatmap of Gene Expression}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{heatmap.png}
+\caption{Heatmap showing the expression levels of selected genes.}
+\label{fig:heatmap}
+\end{figure}
+
+\subsection{Lollipop Plot}
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.9\textwidth]{lollipop.png}
+\caption{Lollipop Plot showing the relationship between Age and Gene Expression}
+\label{fig:lollipop}
+\end{figure}
+
+\section{Discussion}
+The first table (table 1) showcases the relationship between the variables age, ferritin, D-dimer levels, disease status, and mechanical ventilation stratified by sex. Interestingly, there was a notieable difference between ferritin levels between males and females, but more analysis is necessary to make further conclusions. The specific analysis of the ABCB4 gene expression provided insights into its variability across participants. The histogram (Figure \ref{fig:histogram}) plot showed a relatively normal distribution, with a greater amount of gene expression being correlated with a decrease in the count, while the scatter plot (Figure \ref{fig:scatter}) suggested no strong correlation between ABCB4 expression and age. The boxplot (Figure \ref{fig:boxplot}) indicated some variability in expression based on disease status and sex, with females who did not have covid-19 having much more variability in the gene expression, while men were fairly standard. Interestingly, males and females were very similar in gene expression when they did have covid-19. Further, the heatmap (Figure \ref{fig:heatmap}) highlighted overall gene expression patterns across different samples showcasing that certain genes, such as ABCA7 had much higher expression than a gene such as ABCC11. Lastly, the Lollipop Plot (Figure \ref{fig:lollipop}) showcases the relationship between Age and Gene expression, which allowed us to compare gene expression to age, showcasing the wide variability.
+
+\newpage
+\section{References}
+\bibliographystyle{plain}
+\bibliography{references.bib} 
+\end{document}
+
+
+
