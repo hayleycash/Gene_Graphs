@@ -151,12 +151,12 @@ metadata_processed <- metadata_df %>%
   separate(V1, into = c("Sample", "GSM", "Public", "Source_Name", "Disease_Status", "Sex", "Additional_Data"), sep = ",") %>%
   select(Sample, Disease_Status, Sex)
 
+#SYSTEM OF CHECKS
 # Remove rows with NA values in essential columns or will cause errors
 metadata_processed <- metadata_processed %>% drop_na(Sample, Disease_Status, Sex)
 # Check and match the number of columns
 metadata_processed <- metadata_processed %>%
   filter(Sample %in% colnames(filtered_genes_df))
-
 # Ensure that the sample names in metadata match the column names in the gene expression data
 filtered_genes_df <- filtered_genes_df[, metadata_processed$Sample]
 
@@ -167,9 +167,8 @@ annotation <- data.frame(
 )
 rownames(annotation) <- metadata_processed$Sample
 
-# Generate the heatmap using pheatmap
+# Generate heatmap using pheatmap
 heatmap <- pheatmap(
-  
   as.matrix(filtered_genes_df),
   annotation_col = annotation,
 # How to cluster rows and columns in a heatmap https://www.geeksforgeeks.org/draw-heatmap-with-clusters-using-pheatmap-in-r/
@@ -198,7 +197,7 @@ lollipop <- ggplot(merged_df, aes(x = age, y = expression)) +
        x = "Age (years)",
        y = "Average Gene Expression",
        subtitle="Age Vs Avg. Expression", 
-       caption="source:QBS103_GSE157103") + 
+       caption="source:QBS103_GSE157103") + #a way to cite where the info came from
   theme(axis.text.x = element_text(angle=65, vjust=0.6),
     plot.background = element_rect(fill = "white"),
     panel.background = element_rect(fill = "white"),
@@ -222,7 +221,7 @@ lollipop
 
 
 ```{r}
-# Load necessary libraries
+#load libraries
 # https://bookdown.org/yihui/rmarkdown-cookbook/kable.html
 library(dplyr)
 library(knitr)
@@ -234,13 +233,11 @@ library(kableExtra)  # Ensure kableExtra is loaded for kable_styling()
 # Load necessary libraries
 library(dplyr)
 library(knitr)
-
-# Load your dataset (assuming you have the file in the working directory)
 series_matrix_df <- read.csv("C:/Users/casha/Downloads/QBS103_GSE157103_series_matrix.csv", stringsAsFactors = FALSE)
 
 #colnames(series_matrix_df) checking names because of errors
 
-# Convert relevant columns to numeric where needed
+# Convert relevant columns to numeric as necessary
 series_matrix_df$age <- as.numeric(gsub("[^0-9]", "", series_matrix_df$age))
 series_matrix_df$ferritin.ng.ml <- as.numeric(series_matrix_df$`ferritin.ng.ml.`)
 series_matrix_df$ddimer.mg.l_feu <- as.numeric(series_matrix_df$`ddimer.mg.l_feu.`)
@@ -265,7 +262,7 @@ summary_stats <- series_matrix_df %>%
     mechanical_ventilation_n = n()
   )
 
-# Add percentages for categorical variables
+# Add percentages for categorical variables (n%)
 summary_stats <- summary_stats %>%
   mutate(
     disease_status_percent = (disease_status_n / sum(disease_status_n)) * 100,
